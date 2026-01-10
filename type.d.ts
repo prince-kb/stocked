@@ -67,6 +67,7 @@ interface CoinMarketData {
 }
 
 interface TrendingCoin {
+  slice(arg0: number, arg1: number): TrendingCoin[];
   item: {
     id: string;
     name: string;
