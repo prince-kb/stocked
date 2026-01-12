@@ -420,7 +420,7 @@
 
     /* Pulsing avatar */
     .header-image {
-      @apply bg-muted/40 h-10 w-10 animate-pulse rounded-full md:h-14 md:w-14;
+      @apply bg-muted h-10 w-10 animate-pulse rounded-full md:h-14 md:w-14;
     }
 
     .info {
@@ -429,16 +429,16 @@
 
     /* Pulsing lines for title/subtitle */
     .header-line-sm {
-      @apply bg-muted/40 h-3 w-24 animate-pulse md:w-28;
+      @apply bg-muted h-3 w-24 animate-pulse md:w-28;
     }
 
     .header-line-lg {
-      @apply bg-muted/40 h-7 w-36 animate-pulse md:w-44;
+      @apply bg-muted h-7 w-36 animate-pulse md:w-44;
     }
 
     /* Pulsing period buttons */
     .period-button-skeleton {
-      @apply bg-muted/40 h-7 w-9 animate-pulse rounded-sm md:w-10;
+      @apply bg-muted h-7 w-9 animate-pulse rounded-sm md:w-10;
     }
 
     .chart {
@@ -471,12 +471,12 @@
 
       /* Pulsing avatar for each name */
       .name-image {
-        @apply bg-muted/40 size-8 animate-pulse rounded-full md:size-9;
+        @apply bg-muted size-8 animate-pulse rounded-full md:size-9;
       }
 
       /* Pulsing line where name would be */
       .name-line {
-        @apply bg-muted/40 h-4 w-24 animate-pulse;
+        @apply bg-muted h-4 w-24 animate-pulse;
       }
 
       .change-cell {
@@ -494,15 +494,15 @@
 
     /* Pulsing small bars for change and price columns */
     .change-line {
-      @apply bg-muted/40 h-4 w-16 animate-pulse;
+      @apply bg-muted h-4 w-16 animate-pulse;
     }
 
     .price-line {
-      @apply bg-muted/40 h-4 w-20 animate-pulse;
+      @apply bg-muted h-4 w-20 animate-pulse;
     }
 
     .change-icon {
-      @apply bg-muted/40 h-3.5 w-3.5 animate-pulse rounded-full;
+      @apply bg-muted h-3.5 w-3.5 animate-pulse rounded-full;
     }
   }
 
