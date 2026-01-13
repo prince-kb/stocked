@@ -67,7 +67,8 @@ interface CoinMarketData {
 }
 
 interface TrendingCoin {
-  slice(arg0: number, arg1: number): TrendingCoin[];
+  slice: any;
+  // slice(arg0: number, arg1: number): TrendingCoin[];
   item: {
     id: string;
     name: string;
@@ -241,6 +242,8 @@ interface LiveCoinHeaderProps {
 }
 
 interface Category {
+  slice: any;
+  // slice(arg0: number, arg1: number): Category[];
   name: string;
   top_3_coins: string[];
   market_cap_change_24h: number;

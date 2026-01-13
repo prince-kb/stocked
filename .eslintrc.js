@@ -1,0 +1,20 @@
+module.exports = {
+  root: true,
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    project: './tsconfig.json',
+  },
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
+  extends: ['next/core-web-vitals', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  plugins: ['@typescript-eslint'],
+  rules: {
+    // project-specific rules (add/override as needed)
+    'react/react-in-jsx-scope': 'off',
+  },
+};

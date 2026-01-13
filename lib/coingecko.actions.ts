@@ -11,14 +11,14 @@ if (!API_KEY) throw new Error('Could not get API Key');
 export async function fetcher<T>(
   endpoint: string,
   params?: QueryParams,
-  revalidate = 60
+  revalidate = 60,
 ): Promise<T> {
   const url = qs.stringifyUrl(
     {
       url: `${BASE_URL}/${endpoint}`,
       query: params,
     },
-    { skipEmptyString: true, skipNull: true }
+    { skipEmptyString: true, skipNull: true },
   );
 
   const res = await fetch(url, {

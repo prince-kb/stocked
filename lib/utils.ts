@@ -10,7 +10,7 @@ export function formatCurrency(
   value: number | null | undefined,
   digits?: number,
   currency?: string,
-  showSymbol?: boolean
+  showSymbol?: boolean,
 ) {
   if (value === null || value === undefined || isNaN(value)) {
     return showSymbol !== false ? '$0.00' : '0.00';
@@ -84,7 +84,7 @@ export function convertOHLCData(data: OHLCData[]) {
 export const ELLIPSIS = 'ellipsis' as const;
 export const buildPageNumbers = (
   currentPage: number,
-  totalPages: number
+  totalPages: number,
 ): (number | typeof ELLIPSIS)[] => {
   const MAX_VISIBLE_PAGES = 5;
 
