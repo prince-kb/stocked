@@ -15,6 +15,7 @@ interface CandlestickChartProps {
   initialPeriod?: Period;
   liveInterval?: '1s' | '1m';
   setLiveInterval?: (interval: '1s' | '1m') => void;
+  isConnected?: boolean;
 }
 
 interface ConverterProps {
