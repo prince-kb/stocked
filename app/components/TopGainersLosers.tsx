@@ -67,8 +67,6 @@ const TopGainersLosers = ({ toppersData }: any) => {
     },
   ];
 
-  console.log(toppersData);
-
   return (
     <div id="top-gainers-losers">
       <h4 className=" mb-2 pb-3 text-xl font-semibold md:text-2xl">Top Gainers / Losers</h4>

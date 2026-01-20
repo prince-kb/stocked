@@ -107,3 +107,13 @@ export async function toppers(revalidate = 60): Promise<TopGainersLosers | boole
 
   return response.json();
 }
+
+export async function search(query: string): Promise<CoinDetailsData[]> {
+  const res = await fetch(`${BASE_URL}/search/query=${query}`, {
+    headers: {
+      x_cg_demo_api_key: API_KEY,
+      'Content-Type': 'application/json',
+    } as Record<string, string>,
+  });
+  return res.json();
+}

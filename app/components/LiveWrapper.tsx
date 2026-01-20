@@ -11,7 +11,11 @@ import CoinHeader from './CoinHeader';
 const LiveWrapper = ({ coinId, poolId, coin, coinOHLCData }: LiveDataProps) => {
   const [liveInterval, setLiveInterval] = useState<'1s' | '1m'>('1s');
 
-  const { trades, ohlcv, price } = useCoinGeckoWebSocket({ coinId, poolId, liveInterval });
+  const { trades, ohlcv, price, isConnected } = useCoinGeckoWebSocket({
+    coinId,
+    poolId,
+    liveInterval,
+  });
   const tradeColumns: DataTableColumn<Trade>[] = [
     {
       header: 'Price',
@@ -58,7 +62,7 @@ const LiveWrapper = ({ coinId, poolId, coin, coinOHLCData }: LiveDataProps) => {
       />
       <Separator className="divider" />
       {/* Use only if web socket is working */}
-      {tradeColumns && (
+      {tradeColumns && isConnected && (
         <div className="trades">
           <h4>Recent Trades</h4>
           <DataTable
