@@ -112,14 +112,22 @@ interface ChartSectionProps {
   coinOHLCData: OHLCData[];
   coinId: string;
 }
-
-interface TopGainersLosers {
+interface Toppers {
   id: string;
   name: string;
   symbol: string;
   image: string;
+  market_cap_rank: number;
+  usd: number;
+  usd_24h_change: number;
+  usd_24h_vol: number;
   price: number;
   priceChangePercentage24h: number;
+}
+
+interface TopGainersLosers {
+  top_gainers: Toppers;
+  top_losers: Toppers;
 }
 
 interface TopGainersLosersResponse {

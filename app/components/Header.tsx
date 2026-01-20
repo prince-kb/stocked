@@ -12,7 +12,7 @@ const Header = () => {
     <header>
       <div className="main-container inner">
         <Link href="/" className="flex items-center">
-          <Image src="/logo.svg" alt="Stocked" height={40} width={40} className="h-8" />
+          <Image src="/logo.svg" alt="Stocked" height={40} width={40} className="h-8 w-auto" />
           <p className="text-lg font-medium">Stockeδ</p>
         </Link>
         <nav>

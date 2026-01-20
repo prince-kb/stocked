@@ -1,7 +1,7 @@
 import Converter from '@/app/components/Converter';
 import LiveWrapper from '@/app/components/LiveWrapper';
 import TopGainersLosers from '@/app/components/TopGainersLosers';
-import { fetcher, getPools } from '@/lib/coingecko.actions';
+import { fetcher, getPools, toppers } from '@/lib/coingecko.actions';
 import { formatCurrency } from '@/lib/utils';
 import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
@@ -28,6 +28,7 @@ const page = async ({ params }: NextPageProps) => {
   const contractAddress = platform?.contract_address || null;
 
   const pool = await getPools(id, network, contractAddress);
+  const toppersData = await toppers();
 
   const coinDetails = [
     {
@@ -93,7 +94,7 @@ const page = async ({ params }: NextPageProps) => {
             ))}
           </ul>
         </div>
-        <TopGainersLosers />
+        {!!toppersData && <TopGainersLosers toppersData={toppersData} />}
       </section>
     </main>
   );

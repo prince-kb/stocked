@@ -21,7 +21,7 @@ const Categories = async () => {
       cellClassName: 'top-gainers-cell',
       cell: (category) =>
         category.top_3_coins.map((coin) => (
-          <Image key={coin} src={coin} alt={coin} width={28} height={28} />
+          <Image key={coin} src={coin} alt={coin} width={28} height={28} className="h-auto" />
         )),
     },
     {

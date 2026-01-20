@@ -11,10 +11,12 @@ const page = async () => {
         <Suspense fallback={<CoinOverviewFallback />}>
           <CoinOverview />
         </Suspense>
+
         <Suspense fallback={<TrendingCoinFallback />}>
           <TrendingCoin />
         </Suspense>
       </section>
+
       <section className="mt-7 w-full space-y-4">
         <Suspense fallback={<p>Loading Categories...</p>}>
           <Categories />

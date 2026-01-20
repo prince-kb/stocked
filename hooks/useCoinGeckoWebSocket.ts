@@ -54,7 +54,7 @@ export const useCoinGeckoWebSocket = ({
           amount: msg.to,
         };
 
-        setTrades((prev) => [newTrade, ...prev].slice(0, 7));
+        setTrades((prev) => [newTrade, ...prev].slice(0, 10));
       }
       if (msg.ch === 'G3') {
         const timestamp = msg.t ?? 0;
@@ -79,7 +79,9 @@ export const useCoinGeckoWebSocket = ({
 
     ws.onerror = () => setIsWsReady(false);
 
-    return () => ws.close();
+    return () => {
+      ws.close();
+    };
   }, []);
 
   useEffect(() => {

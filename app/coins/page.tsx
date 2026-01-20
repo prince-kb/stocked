@@ -4,13 +4,14 @@ import { cn, formatPercentage, formatCurrency } from '@/lib/utils';
 import { fetcher } from '@/lib/coingecko.actions';
 import DataTable from '../components/DataTable';
 import CoinsPagination from '../components/CoinsPagination';
+import Link from 'next/link';
 
 const Coins = async ({ searchParams }: NextPageProps) => {
   const { page } = await searchParams;
   const currentPage = Number(page) || 1;
   const perPage = 10;
 
-  const coinsData = await fetcher<CoinMarketData[]>('/coins/markets', {
+  const coinsData = await fetcher<CoinMarketData[]>('coins/markets', {
     vs_currency: 'usd',
     order: 'market_cap_desc',
     sparkline: 'false',
@@ -29,12 +30,14 @@ const Coins = async ({ searchParams }: NextPageProps) => {
       header: 'Token',
       cellClassName: 'token-cell',
       cell: (coin) => (
-        <div className="token-info">
-          <Image src={coin.image} alt={coin.name} width={36} height={36} className="h-auto" />
-          <p>
-            {coin.name} ({coin.symbol.toUpperCase()})
-          </p>
-        </div>
+        <Link href={`/coins/${coin.id}`}>
+          <div className="token-info">
+            <Image src={coin.image} alt={coin.name} width={36} height={36} className="h-auto" />
+            <p>
+              {coin.name} ({coin.symbol.toUpperCase()})
+            </p>
+          </div>
+        </Link>
       ),
     },
     {

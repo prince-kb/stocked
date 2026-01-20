@@ -19,7 +19,6 @@ const CoinOverview = async () => {
         precision: 'full',
       }),
     ]);
-
     coin = coinRes;
     coinOHLCData = ohlcRes || [];
   } catch (error) {
@@ -36,7 +35,7 @@ const CoinOverview = async () => {
             alt={coin?.name}
             width={56}
             height={56}
-            className="h-8 w-8"
+            className="h-8 w-auto"
           />
           <div className="info">
             <p>

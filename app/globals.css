@@ -420,7 +420,7 @@
 
     /* Pulsing avatar */
     .header-image {
-      @apply bg-muted h-10 w-10 animate-pulse rounded-full md:h-14 md:w-14;
+      @apply h-auto bg-muted h-10 w-10 animate-pulse rounded-full md:h-14 md:w-14;
     }
 
     .info {
@@ -471,7 +471,7 @@
 
       /* Pulsing avatar for each name */
       .name-image {
-        @apply bg-muted size-8 animate-pulse rounded-full md:size-9;
+        @apply h-auto bg-muted size-8 animate-pulse rounded-full md:size-9;
       }
 
       /* Pulsing line where name would be */
@@ -733,7 +733,7 @@
       }
 
       .icon {
-        @apply bg-dark-400 z-20 size-8 rounded-full p-2 text-green-500;
+        @apply bg-dark-400 h-auto z-20 size-8 rounded-full p-2 text-green-500;
       }
     }
 

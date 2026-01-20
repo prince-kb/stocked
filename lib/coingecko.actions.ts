@@ -5,8 +5,11 @@ import qs from 'query-string';
 const BASE_URL = process.env.COINGECKO_BASE_URL;
 const API_KEY = process.env.COINGECKO_API_KEY;
 
-if (!BASE_URL) throw new Error('Could not get Base URL');
-if (!API_KEY) throw new Error('Could not get API Key');
+const BASE_URL_PRO = process.env.COINGECKO_PRO_URL;
+const API_KEY_PRO = process.env.COINGECKO_PRO_API_KEY;
+
+if (!BASE_URL) throw new Error('Could not get base url');
+if (!API_KEY) throw new Error('Could not get api key');
 
 export async function fetcher<T>(
   endpoint: string,
@@ -21,7 +24,7 @@ export async function fetcher<T>(
     { skipEmptyString: true, skipNull: true },
   );
 
-  const res = await fetch(url, {
+  const response = await fetch(url, {
     headers: {
       'x-cg-demo-api-key': API_KEY,
       'Content-Type': 'application/json',
@@ -29,10 +32,13 @@ export async function fetcher<T>(
     next: { revalidate },
   });
 
-  if (!res.ok) {
-    const errorBody: CoinGeckoErrorBody = await res.json().catch(() => ({}));
-    throw new Error(`API Error : ${res.status} : ${errorBody.error || res.statusText}`);
-  } else return res.json();
+  if (!response.ok) {
+    const errorBody: CoinGeckoErrorBody = await response.json().catch(() => ({}));
+
+    throw new Error(`API Error: ${response.status}: ${errorBody.error || response.statusText} `);
+  }
+
+  return response.json();
 }
 
 export async function getPools(
@@ -55,6 +61,7 @@ export async function getPools(
 
       return poolData.data?.[0] ?? fallback;
     } catch (error) {
+      console.log(error);
       return fallback;
     }
   }
@@ -66,4 +73,37 @@ export async function getPools(
   } catch {
     return fallback;
   }
+}
+
+export async function toppers(revalidate = 60): Promise<TopGainersLosers | boolean> {
+  const res = await fetch(`${BASE_URL_PRO}/ping`, {
+    headers: {
+      'x-cg-pro-api-key': API_KEY_PRO,
+      'Content-Type': 'application/json',
+    } as Record<string, string>,
+  });
+
+  if (!res.ok) return false;
+
+  const url = qs.stringifyUrl(
+    {
+      url: `${BASE_URL_PRO}/coins/top_gainers_losers?vs_currency=usd`,
+    },
+    { skipEmptyString: true, skipNull: true },
+  );
+
+  const response = await fetch(url, {
+    headers: {
+      'x-cg-pro-api-key': API_KEY_PRO,
+      'Content-Type': 'application/json',
+    } as Record<string, string>,
+    next: { revalidate },
+  });
+
+  if (!response.ok) {
+    const errorBody: CoinGeckoErrorBody = await response.json().catch(() => ({}));
+    throw new Error(`API Error: ${response.status}: ${errorBody.error || response.statusText} `);
+  }
+
+  return response.json();
 }

@@ -43,7 +43,7 @@ const CoinHeader = ({
     <div id="coin-header">
       <h3>{name}</h3>
       <div className="info">
-        <Image src={image} alt={name} height={77} width={77} />
+        <Image src={image} alt={name} height={77} width={77} className="h-auto" />
         <div className="price-row">
           <h1>{formatCurrency(livePrice)}</h1>
           <Badge className={cn('badge', isTrendingUp ? 'badge-up' : 'badge-down')}>

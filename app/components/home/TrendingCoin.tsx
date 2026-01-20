@@ -14,7 +14,7 @@ const TrendingCoin = async () => {
         const item = coin.item;
         return (
           <Link href={`/coins/${item.id}`} className="flex items-center gap-3">
-            <Image src={item.large} alt={item.name} width={36} height={36} className="" />
+            <Image src={item.large} alt={item.name} width={36} height={36} className="w-auto" />
             <p>{item.name}</p>
           </Link>
         );
@@ -49,7 +49,7 @@ const TrendingCoin = async () => {
   ];
   let trendingCoins;
   try {
-    trendingCoins = await fetcher<{ coins: TrendingCoin }>('search/trending', undefined, 300);
+    trendingCoins = await fetcher<{ coins: TrendingCoin }>('search/trending', {});
   } catch (error) {
     console.error('Error fetching trending coins:', error);
     return <TrendingCoinFallback />;
