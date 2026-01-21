@@ -76,7 +76,7 @@ export const SearchModal = ({
   );
 
   const isSearching = false,
-    searchResults: any = [];
+    searchResults: CoinDetailsData[] = [];
   /* This function will be implemented later */
   // const { data: searchResults = [], isValidating: isSearching } = useSWR<SearchCoin[]>(
   //   debouncedQuery ? ['coin-search', debouncedQuery] : null,
@@ -155,7 +155,9 @@ export const SearchModal = ({
           {isResultsVisible && (
             <CommandGroup heading={<p className="heading">Search Results</p>} className="group">
               {searchResults.slice(0, SEARCH_LIMIT).map((coin) => (
-                <SearchItem key={coin.id} coin={coin} onSelect={handleSelect} isActiveName />
+                /* Show on Results fetching */
+                // <SearchItem key={coin.id} coin={coin} onSelect={handleSelect} isActiveName />
+                <div></div>
               ))}
             </CommandGroup>
           )}
