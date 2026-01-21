@@ -68,7 +68,7 @@ interface CoinMarketData {
 }
 
 interface TrendingCoin {
-  // slice: any;
+  slice: any;
   item: {
     id: string;
     name: string;
