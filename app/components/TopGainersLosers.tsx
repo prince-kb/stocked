@@ -32,11 +32,6 @@ const TopGainersLosers = ({ toppersData }: any) => {
       ),
     },
     {
-      header: 'Cap Rank',
-      cellClassName: 'font-semibold',
-      cell: (toppersData) => toppersData.market_cap_rank,
-    },
-    {
       header: 'Price',
       cellClassName: 'font-semibold',
       cell: (toppersData) => (toppersData.usd ? formatCurrency(toppersData.usd) : '-'),

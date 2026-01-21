@@ -3,6 +3,7 @@ import CoinOverview from './components/home/CoinOverview';
 import TrendingCoin from './components/home/TrendingCoin';
 import { CoinOverviewFallback, TrendingCoinFallback } from './components/home/fallback';
 import Categories from './components/home/Categories';
+import { SearchModal } from './components/SearchModal';
 
 const page = async () => {
   return (
