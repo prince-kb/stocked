@@ -75,13 +75,16 @@ export const SearchModal = ({
     [searchQuery],
   );
 
-  const { data: searchResults = [], isValidating: isSearching } = useSWR<SearchCoin[]>(
-    debouncedQuery ? ['coin-search', debouncedQuery] : null,
-    ([, query]) => searchCoins(query as string),
-    {
-      revalidateOnFocus: false,
-    },
-  );
+  const isSearching = false,
+    searchResults: any = [];
+  /* This function will be implemented later */
+  // const { data: searchResults = [], isValidating: isSearching } = useSWR<SearchCoin[]>(
+  //   debouncedQuery ? ['coin-search', debouncedQuery] : null,
+  //   ([, query]) => searchCoins(query as string),
+  //   {
+  //     revalidateOnFocus: false,
+  //   },
+  // );
 
   useKey(
     (event) => event.key?.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey),
