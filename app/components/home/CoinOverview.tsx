@@ -1,4 +1,4 @@
-import { fetcher } from '@/lib/coingecko.actions';
+import { fetcher, searchCoins } from '@/lib/coingecko.actions';
 import { formatCurrency } from '@/lib/utils';
 import Image from 'next/image';
 import { CoinOverviewFallback } from './fallback';

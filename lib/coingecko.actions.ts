@@ -108,13 +108,85 @@ export async function toppers(revalidate = 60): Promise<TopGainersLosers | boole
   return response.json();
 }
 
-export async function searchCoins(query: string): Promise<CoinDetailsData[]> {
-  const res = await fetch(`${BASE_URL}/search/query=${query}`, {
-    headers: {
-      x_cg_demo_api_key: API_KEY,
-      'Content-Type': 'application/json',
-    } as Record<string, string>,
-  });
-  console.log(res);
-  return res.json();
+export async function searchCoins(
+  query: string,
+  trendingCoins?: TrendingCoin[],
+): Promise<SearchCoin[]> {
+  // If no query is provided, return trending coins formatted as SearchCoin[]
+  if (!query.trim()) {
+    if (trendingCoins && trendingCoins.length > 0) {
+      return trendingCoins.slice(0, 8).map(({ item }) => ({
+        id: item.id,
+        name: item.name,
+        symbol: item.symbol,
+        market_cap_rank: item.market_cap_rank || null,
+        thumb: item.thumb || '',
+        large: item.large || '',
+        data: {
+          price: item.data?.price || 0,
+          price_change_percentage_24h: item.data?.price_change_percentage_24h?.usd || 0,
+        },
+      }));
+    }
+    return [];
+  }
+
+  try {
+    const coins = await fetch(`${BASE_URL}/search?query=${query}`, {
+      headers: {
+        'x-cg-demo-api-key': API_KEY,
+        'Content-Type': 'application/json',
+      } as Record<string, string>,
+    });
+
+    if (!coins.ok) {
+      const errorBody = await coins.json().catch(() => ({}));
+      throw new Error(`Search API Error: ${coins.status}: ${errorBody.error || coins.statusText}`);
+    }
+
+    const coinsData = await coins.json();
+    const searchCoins = (coinsData.coins || []).slice(0, 10);
+
+    // Fetch detailed data for each coin in parallel
+    const searchResults = await Promise.all(
+      searchCoins.map(async (coin: any) => {
+        try {
+          const data = await fetcher<CoinDetailsData>(`coins/${coin.id}`);
+          return {
+            id: data.id,
+            name: data.name,
+            symbol: data.symbol,
+            market_cap_rank: data.market_cap_rank,
+            thumb: coin.thumb || data.image?.small || '',
+            large: coin.large || data.image?.large || '',
+            data: {
+              price: data.market_data?.current_price?.usd || 0,
+              price_change_percentage_24h:
+                data.market_data?.price_change_percentage_24h_in_currency?.usd || 0,
+            },
+          };
+        } catch (error) {
+          console.error(`Failed to fetch details for coin ${coin.id}:`, error);
+          // Return basic search result if detailed fetch fails
+          return {
+            id: coin.id,
+            name: coin.name,
+            symbol: coin.symbol,
+            market_cap_rank: coin.market_cap_rank || null,
+            thumb: coin.thumb || '',
+            large: coin.large || '',
+            data: {
+              price: 0,
+              price_change_percentage_24h: 0,
+            },
+          };
+        }
+      }),
+    );
+
+    return searchResults;
+  } catch (error) {
+    console.error('Search coins error:', error);
+    return [];
+  }
 }

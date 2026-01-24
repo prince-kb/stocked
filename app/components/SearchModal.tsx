@@ -75,16 +75,16 @@ export const SearchModal = ({
     [searchQuery],
   );
 
-  const isSearching = false,
-    searchResults: CoinDetailsData[] = [];
+  // const isSearching = false,
+  //   searchResults: CoinDetailsData[] = [];
   /* This function will be implemented later */
-  // const { data: searchResults = [], isValidating: isSearching } = useSWR<SearchCoin[]>(
-  //   debouncedQuery ? ['coin-search', debouncedQuery] : null,
-  //   ([, query]) => searchCoins(query as string),
-  //   {
-  //     revalidateOnFocus: false,
-  //   },
-  // );
+  const { data: searchResults = [], isValidating: isSearching } = useSWR<SearchCoin[]>(
+    debouncedQuery ? ['coin-search', debouncedQuery] : null,
+    ([, query]) => searchCoins(query as string),
+    {
+      revalidateOnFocus: false,
+    },
+  );
 
   useKey(
     (event) => event.key?.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey),
@@ -123,7 +123,13 @@ export const SearchModal = ({
         </kbd>
       </Button>
 
-      <CommandDialog open={open} onOpenChange={setOpen} className="dialog" data-search-modal>
+      <CommandDialog
+        open={open}
+        onOpenChange={setOpen}
+        className="dialog"
+        data-search-modal
+        title="SearchBox"
+      >
         <div className="cmd-input">
           <CommandInput
             placeholder="Search for a token by name or symbol..."
@@ -155,9 +161,7 @@ export const SearchModal = ({
           {isResultsVisible && (
             <CommandGroup heading={<p className="heading">Search Results</p>} className="group">
               {searchResults.slice(0, SEARCH_LIMIT).map((coin) => (
-                /* Show on Results fetching */
-                // <SearchItem key={coin.id} coin={coin} onSelect={handleSelect} isActiveName />
-                <div></div>
+                <SearchItem key={coin.id} coin={coin} onSelect={handleSelect} isActiveName />
               ))}
             </CommandGroup>
           )}
